@@ -1,7 +1,7 @@
 {
-	"name":"webpy_skeleton",
-	"title": "Webpy Skeleton Project",
-	"description": "A Webpy Skeleton Project to use as a base",
+	"name":"pyInventory",
+	"title": "Python Inventory Webapp",
+	"description": "An inventory viewer/tracker single-page webapp",
 	"version": "0.0.1",
 	"private": true,
 	"dependencies": {
@@ -19,7 +19,7 @@
 		"grunt-qunit-junit": ">=0.1.0-alpha2"
 	},
 	"licenses": {
-		"type": "MIT",
-		"url": "http://opensource.org/licenses/MIT"
+		"type": "AGPLv3",
+		"url": "http://opensource.org/licenses/AGPL"
 	}
 }
