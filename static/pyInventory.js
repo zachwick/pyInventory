@@ -12050,7 +12050,6 @@ var Item = Backbone.Model.extend({
 		sale_price: 0.00
 	},
 	urlRoot : '/items/' 
-	//url: '/items/'
 });
 
 var Items = Backbone.Collection.extend({

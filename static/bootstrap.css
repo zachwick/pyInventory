@@ -1,0 +1,42 @@
+#item-list {
+  width: 100%;
+}
+#item-list td {
+  width: 14.25%;
+  text-align: center;
+}
+#item-list td.item-actions span {
+  cursor: pointer;
+  border: 1px solid black;
+  padding: 2px 2px;
+}
+table {
+  width: 80%;
+  margin-left: 10%;
+  height: auto;
+  display: relative;
+}
+table thead {
+  width: 100%;
+}
+table thead tr {
+  width: 100%;
+}
+table thead tr td {
+  font-weight: bold;
+  width: 14.25%;
+  text-align: center;
+}
+form {
+  width: 80%;
+  margin-left: 10%;
+}
+form input {
+  width: 13%;
+  margin-left: 6px;
+}
+#app-container {
+  width: 100%;
+  height: auto;
+  display: relative;
+}
