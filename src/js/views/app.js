@@ -31,8 +31,11 @@ var AppView = Backbone.View.extend({
 			purchase_price: this.$("input[name='purchase_price']").val(),
 			sale_price: this.$("input[name='sale_price']").val()
 		});
-		newItem.save();
-		//this.items.add(newItem).save();
+		newItem.save({},{
+			success: _.bind(function(model,response,collection) {
+				this.items.add(model);
+			},this)
+		});
 	},
 	render: function() {
 		this.$el.html(this.template());
