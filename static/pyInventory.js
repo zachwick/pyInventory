@@ -12048,7 +12048,8 @@ var Item = Backbone.Model.extend({
 		quantity: 0,
 		purchase_price: 0.00,
 		sale_price: 0.00
-	}
+	},
+	url: '/items/'
 });
 
 var Items = Backbone.Collection.extend({
@@ -12056,8 +12057,50 @@ var Items = Backbone.Collection.extend({
 	url: '/items/'
 });
 
+var AppView = Backbone.View.extend({
+	el: "#app-container",
+	template: function() {
+		return _.template($("#app-template").html());
+	},
+	events: {
+		'submit #add-item-form': 'newItem'
+	},
+	initialize: function(options) {
+		this.items = new Items();
+		this.listenTo(this.items, 'all', this.render);
+
+		this.render();
+		this.items.fetch();
+	},
+	addOne: function(item) {
+		var view = new ItemView({ model: item });
+		this.$("#item-list").append(view.render().el);
+	},
+	addAll: function() {
+		this.items.each(this.addOne, this);
+	},
+	newItem: function(e) {
+		e.stopPropagation();
+		e.preventDefault();
+		var newItem = new Item({
+			name: this.$("input[name='name']").val(),
+			description: this.$("input[name='description']").val(),
+			location: this.$("input[name='location']").val(),
+			quantity: this.$("input[name='quantity']").val(),
+			purchase_price: this.$("input[name='purchase_price']").val(),
+			sale_price: this.$("input[name='sale_price']").val()
+		});
+		newItem.save();
+		//this.items.add(newItem).save();
+	},
+	render: function() {
+		this.$el.html(this.template());
+		this.addAll();
+	}
+});
+
 var ItemView = Backbone.View.extend({
-	tagName: "li",
+	tagName: "tr",
 	template: function() {
 		return _.template($("#item-template").html());
 	},
@@ -12074,13 +12117,4 @@ var ItemView = Backbone.View.extend({
 	}
 });
 
-var items = new Items();
-items.fetch({
-	success: function(collection, response, options) {
-		collection.each(function(item) {
-			console.log(item);
-			var view = new ItemView({ model: item });
-			this.$("#item-list").append(view.render().el);
-		});
-	}
-});
+var App = new AppView;

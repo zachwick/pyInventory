@@ -1,5 +1,5 @@
 var ItemView = Backbone.View.extend({
-	tagName: "li",
+	tagName: "tr",
 	template: function() {
 		return _.template($("#item-template").html());
 	},

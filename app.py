@@ -36,8 +36,9 @@ class Items:
                 "description": item.description,
                 "id": item.id,
                 "quantity": item.quantity,
-                "purchase_price": item.purchase_price,
-                "sale_price": item.sale_price
+                "purchase_price": str(item.purchase_price),
+                "sale_price": str(item.sale_price),
+                "location": item.location
             })
 
         web.header("Content-Type","application/json")
@@ -46,13 +47,15 @@ class Items:
 
     def POST(self):
         """ Recieved a POST request, so adding a new item """
-        new_id = model.new_item(web.input());
+        data = json.loads(web.data())
+        new_id = model.new_item(data);
         data = [{
-            "name": web.input()['name'],
-            "description": web.input()['description'],
-            "quantity": web.input()['quantity'],
-            "purchase_price": web.input()['purchase_price'],
-            "sale_price": web.input()['sale_price'],
+            "name": str(data['name']),
+            "description": str(data['description']),
+            "quantity": str(data['quantity']),
+            "purchase_price": str(data['purchase_price']),
+            "sale_price": str(data['sale_price']),
+            "location": str(data['location']),
             "id": new_id
         }]
         web.header("Content-Type","application/json")
@@ -61,15 +64,20 @@ class Items:
 
     def PUT(self):
         """ Recieved a PUT request, so updating an existing item """
-        model.update_item(web.input())
+        data = json.loads(web.data())
+        model.update_item(data)
         data = [{
-            "name": web.input()['name'],
-            "description": web.input()['description'],
-            "quantity": web.input()['quantity'],
-            "purchase_price": web.input()['purchase_price'],
-            "sale_price": web.input()['sale_price'],
-            "id": web.input()['id']
+            "name": data['name'],
+            "description": data['description'],
+            "quantity": data['quantity'],
+            "purchase_price": data['purchase_price'],
+            "sale_price": data['sale_price'],
+            "location": data['location'],
+            "id": data['id']
         }]
+        web.header("Content-Type","application/json")
+        web.header("Cache-Control","no-cache")
+        return json.dumps(data)
     
     def DELETE(self,id):
         """ Recieved an OPTIONS request, so delete an exising item with id """
