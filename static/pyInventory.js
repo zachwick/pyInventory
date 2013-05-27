@@ -12049,7 +12049,8 @@ var Item = Backbone.Model.extend({
 		purchase_price: 0.00,
 		sale_price: 0.00
 	},
-	url: '/items/'
+	urlRoot : '/items/' 
+	//url: '/items/'
 });
 
 var Items = Backbone.Collection.extend({
@@ -12108,6 +12109,15 @@ var ItemView = Backbone.View.extend({
 		return _.template($("#item-template").html());
 	},
 	events: {
+		'click .delete':'deleteSelf',
+		'click .edit':'toggleEditingState'
+	},
+	deleteSelf: function(e) {
+		e.stopPropagation();
+		e.preventDefault();
+		this.model.destroy();
+	},
+	toggleEditingState: function(e) {
 
 	},
 	initialize: function() {

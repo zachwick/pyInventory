@@ -4,6 +4,15 @@ var ItemView = Backbone.View.extend({
 		return _.template($("#item-template").html());
 	},
 	events: {
+		'click .delete':'deleteSelf',
+		'click .edit':'toggleEditingState'
+	},
+	deleteSelf: function(e) {
+		e.stopPropagation();
+		e.preventDefault();
+		this.model.destroy();
+	},
+	toggleEditingState: function(e) {
 
 	},
 	initialize: function() {
